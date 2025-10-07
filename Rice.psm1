@@ -1,5 +1,7 @@
 Import-Module $PSScriptRoot\winwal\winwal.psm1
 
+$WALLPAPER_FOLDER = "$HOME\Downloads\reddit-wallpapers"
+
 function SetWallpaper() {
   param(
     # Path to image to set as background, if not set current wallpaper is used
@@ -25,7 +27,7 @@ function SetWallpaper() {
 
 
 function RandomWallpaper() {
-  $file = Get-ChildItem -Path $HOME\Downloads\reddit-wallpapers -File | Get-Random
+  $file = Get-ChildItem -Path $WALLPAPER_FOLDER -File | Get-Random
   # [Console]::Error.WriteLine "Found random image $file"
   SetWallpaper -Image $file.FullName
 }
@@ -39,5 +41,5 @@ function Reddit() {
   param (
     [string]$Subreddit = "wallpaper"
   )
-  python $PSScriptRoot\reddit.py -o "$HOME\Downloads\reddit-wallpapers" $Subreddit
+  python $PSScriptRoot\reddit.py -o $WALLPAPER_FOLDER $Subreddit
 }
