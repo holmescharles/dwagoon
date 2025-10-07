@@ -35,11 +35,9 @@ function Rice() {
   Update-WalTheme -Backend colorz
 }
 
-function ScrapeReddit() {
+function Reddit() {
   param (
     [string]$Subreddit = "wallpaper"
   )
   python $PSScriptRoot\scrape_reddit.py -o "$HOME\Downloads\reddit-wallpapers" $Subreddit
 }
-
-Set-Alias Reddit ScrapeReddit
