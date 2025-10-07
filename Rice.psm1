@@ -30,8 +30,16 @@ function RandomWallpaper() {
   SetWallpaper -Image $file.FullName
 }
 
-function RunWal() {
+function Rice() {
   RandomWallpaper
   Update-WalTheme -Backend colorz
 }
 
+function ScrapeReddit() {
+  param (
+    [string]$Subreddit = "wallpaper"
+  )
+  python $PSScriptRoot\scrape_reddit.py -o "$HOME\Downloads\reddit-wallpapers" $Subreddit
+}
+
+Set-Alias Reddit ScrapeReddit
