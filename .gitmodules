@@ -1,0 +1,3 @@
+[submodule "winwal"]
+	path = winwal
+	url = git@github.com:scaryrawr/winwal.git
