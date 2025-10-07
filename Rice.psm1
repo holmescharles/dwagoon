@@ -39,5 +39,5 @@ function Reddit() {
   param (
     [string]$Subreddit = "wallpaper"
   )
-  python $PSScriptRoot\scrape_reddit.py -o "$HOME\Downloads\reddit-wallpapers" $Subreddit
+  python $PSScriptRoot\reddit.py -o "$HOME\Downloads\reddit-wallpapers" $Subreddit
 }

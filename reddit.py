@@ -8,6 +8,7 @@ import requests
 
 
 def fetch_reddit_page(subreddit):
+  message(f"Fetching posts from r/{subreddit}")
   response = requests.get(
     url=f"https://www.reddit.com/r/{subreddit}/.json",
     headers={"User-Agent": "wallpaper-download-cdh"},
@@ -90,15 +91,19 @@ def remove_small_images(filepaths, min_width=1920):
 
 def main():
 
-  p = ArgumentParser()
-  p.add_argument("subreddit", nargs="?", default="wallpaper")
-  p.add_argument("-o", "--output", default="WALLPAPERS")
-  args = p.parse_args()
+  parser = ArgumentParser()
+  parser.add_argument("subreddit", nargs="?", default="wallpaper")
+  parser.add_argument("-o", "--output", default="WALLPAPERS", type=Path)
+  params = parser.parse_args()
 
-  page = fetch_reddit_page(args.subreddit)
+  if params.output.exists():
+    import shutil
+    shutil.rmtree(params.output)
+
+  page = fetch_reddit_page(params.subreddit)
   urls = list(extract_urls(page))
-  downloads = download_all_images(urls, args.output, n_jobs=-1)
-  remove_small_images(downloads)
+  downloads = download_all_images(urls, params.output, n_jobs=-1)
+  removed = remove_small_images(downloads)
 
 
 main()
