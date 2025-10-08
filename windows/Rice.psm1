@@ -41,5 +41,5 @@ function Reddit() {
   param (
     [string]$Subreddit = "wallpaper"
   )
-  python $PSScriptRoot\reddit.py -o $WALLPAPER_FOLDER $Subreddit
+  python $PSScriptRoot/../reddit.py -o $WALLPAPER_FOLDER $Subreddit
 }
