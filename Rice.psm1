@@ -2,6 +2,16 @@ Import-Module $PSScriptRoot\winwal\winwal.psm1
 
 $WALLPAPER_FOLDER = "$HOME\Downloads\reddit-wallpapers"
 
+function wal {
+  [CmdletBinding(DefaultParameterSetName = "Run")]
+  param (
+    [Parameter(ValueFromRemainingArguments = $true)]
+    [string[]]$Args
+  )
+  $exe = Get-Command wal -CommandType Application
+  & $exe.Path '--cols16' @Args
+}
+
 function SetWallpaper() {
   param(
     # Path to image to set as background, if not set current wallpaper is used
@@ -24,7 +34,6 @@ function SetWallpaper() {
   # Setting the wallpaper requires an absolute path, so pass image into resolve-path
   [PInvoke]::SystemParametersInfo(0x0014, 0, $($Image | Resolve-Path), 0x0003) | out-null
 }
-
 
 function RandomWallpaper() {
   $file = Get-ChildItem -Path $WALLPAPER_FOLDER -File | Get-Random
