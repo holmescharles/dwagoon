@@ -6,6 +6,7 @@ dependencies = ["requests", "aiohttp", "pillow"]
 
 [project.scripts]
 reddit = "reddit.__main__:main"
+rice = "reddit.wal:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]

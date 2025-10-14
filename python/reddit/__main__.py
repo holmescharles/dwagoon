@@ -7,9 +7,9 @@ from .message import message
 from .urls import fetch_urls
 from .download import download_images
 from .toosmall import purge_small_images
+from .wal import WALLPAPER_FOLDER
 
 
-WALLPAPER_FOLDER = Path.home() / "Downloads" / "reddit"
 
 PARSER = ArgumentParser()
 PARSER.add_argument("subreddit", nargs="?", default="wallpaper")
