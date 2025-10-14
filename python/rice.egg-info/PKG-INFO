@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: rice
+Version: 0.1.0
+Summary: You like rice and beans?
+Requires-Dist: requests
+Requires-Dist: aiohttp
+Requires-Dist: pillow

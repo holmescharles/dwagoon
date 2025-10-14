@@ -1,0 +1,2 @@
+[console_scripts]
+reddit = reddit.__main__:main
