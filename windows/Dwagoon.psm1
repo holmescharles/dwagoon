@@ -40,7 +40,7 @@ function RandomWallpaper() {
   SetWallpaper -Image $file.FullName
 }
 
-function WinRice() {
+function Rice() {
   RandomWallpaper
   Update-WalTheme -Backend colorz
 }
