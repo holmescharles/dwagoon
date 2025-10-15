@@ -1,17 +1,14 @@
-[project]
-name = "rice"
-version = "0.1.0"
-description = "You like rice and beans?"
-dependencies = ["requests", "aiohttp", "pillow", "pywal16", "colorz"]
-
-[project.scripts]
-reddit = "reddit.__main__:main"
-rice = "reddit.wal:main"
-wal = "pywal.__main__:main"
-
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.packages.find]
-where = ["python"]
+[project]
+name = "dwagoon"
+version = "0.1.0"
+description = "Download wallpapers and goon"
+dependencies = ["requests", "aiohttp", "pillow", "pywal16", "colorz"]
+
+[project.scripts]
+reddit = "dwagoon.scripts.reddit:main"
+rice = "dwagoon.scripts.rice:main"
+wal = "pywal.__main__:main"
