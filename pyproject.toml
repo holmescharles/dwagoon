@@ -10,6 +10,5 @@ dependencies = ["requests", "aiohttp", "pillow", "pywal16", "colorz"]
 
 [project.scripts]
 reddit = "dwagoon.scripts.reddit:main"
-rice = "dwagoon.scripts.rice:main"
 wal = "pywal.__main__:main"
 savewall = "dwagoon.scripts.savewall:main"

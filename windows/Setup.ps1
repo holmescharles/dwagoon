@@ -21,9 +21,15 @@ Set-Acl $moduleFile $fileAcl
 # Unblock the module file
 Unblock-File -Path $moduleFile
 
-# Optional: Add import to global profile (requires admin)
-$profilePath = "$env:windir\System32\WindowsPowerShell\v1.0\profile.ps1"
-if (-not (Test-Path $profilePath)) {
-    New-Item -Path $profilePath -ItemType File -Force
+# Import module into global profiles for both PowerShell versions
+$profilePaths = @(
+    "$env:windir\System32\WindowsPowerShell\v1.0\profile.ps1",         # Windows PowerShell 5.1
+    "C:\Program Files\PowerShell\7\profile.ps1"                        # PowerShell 7+
+)
+
+foreach ($profilePath in $profilePaths) {
+    if (-not (Test-Path $profilePath)) {
+        New-Item -Path $profilePath -ItemType File -Force
     }
     Add-Content -Path $profilePath -Value "`nImport-Module '$moduleFile'"
+}
