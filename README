@@ -1,0 +1,19 @@
+# Installation
+
+To install for all users, run terminal as administrator and execute:
+
+```powershell
+cd C:\Users\Public\Documents
+git clone --recurse-submodules git@github.com:holmescharles/dwagoon.git
+pip install .\dwagoon
+```
+
+Then add the following to your PowerShell profile (run `notepad $PROFILE` to open it):
+
+```powershell
+Import-Module "C:\Users\Public\Documents\dwagoon\dwagoon.psm1"
+```
+
+Download wallpapers with `reddit`.
+
+Change wallpapers and themes with `rice`.
