@@ -33,3 +33,15 @@ foreach ($profilePath in $profilePaths) {
     }
     Add-Content -Path $profilePath -Value "`nImport-Module '$moduleFile'"
 }
+
+# Fix permissions for the schemes folder
+$schemesFolder = "C:\Users\Public\Documents\dwagoon\windows\winwal\colortool\schemes"
+if (Test-Path $schemesFolder) {
+    $schemesAcl = Get-Acl $schemesFolder
+    $modifyRule = New-Object System.Security.AccessControl.FileSystemAccessRule("Users","Modify","ContainerInherit,ObjectInherit","None","Allow")
+    $schemesAcl.AddAccessRule($modifyRule)
+    Set-Acl $schemesFolder $schemesAcl
+    Write-Host "Permissions updated for schemes folder."
+} else {
+    Write-Host "Schemes folder not found: $schemesFolder"
+}

@@ -17,3 +17,5 @@ Import-Module "C:\Users\Public\Documents\dwagoon\dwagoon.psm1"
 Download wallpapers with `reddit`.
 
 Change wallpapers and themes with `rice`.
+
+Do not install in editable mode -- otherwise other users will not be able to access the files.
