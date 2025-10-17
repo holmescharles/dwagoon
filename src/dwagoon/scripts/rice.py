@@ -33,7 +33,7 @@ def main():
     message(f"{sys.argv[0]} will not run in SSH")
     return
 
-  command = ["wal", "-i", WALLPAPER_FOLDER, "--backend", "colorz", "--cols16"] + sys.argv[1:]
+  command = ["wal", "-i", WALLPAPER_FOLDER, "--cols16"] + sys.argv[1:]
   message(f"Running: {' '.join(map(str, command))}")
   if is_wsl():
     message("Delegating to powershell")
