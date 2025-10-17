@@ -1,2 +1,7 @@
+- Delete bad ones, save good ones, can't move on until you do
+  Essentially sort while advancing and don't revisit.
+  Might want this to be ./liked ./archive
+
+MAYBE LATER:
 - Make easy install for windows
-- Auto dark/light
+- Auto dark/light for unix?
