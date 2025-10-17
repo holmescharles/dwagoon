@@ -17,5 +17,7 @@ savewall = "dwagoon.scripts.savewall:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-packages = ["dwagoon"]
 include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
