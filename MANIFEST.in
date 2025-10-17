@@ -1,1 +1,2 @@
-recursive-include src/dwagoon/windows/winwal *
+include src\dwagoon\scripts\UpdateTerminal.ps1
+

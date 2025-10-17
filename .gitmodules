@@ -1,3 +1,0 @@
-[submodule "winwal"]
-	path = src/dwagoon/windows/winwal
-	url = git@github.com:scaryrawr/winwal.git
