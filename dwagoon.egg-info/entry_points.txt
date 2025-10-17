@@ -1,0 +1,4 @@
+[console_scripts]
+reddit = dwagoon.scripts.reddit:main
+savewall = dwagoon.scripts.savewall:main
+wal = pywal.__main__:main
