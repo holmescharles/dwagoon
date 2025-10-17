@@ -2,15 +2,15 @@ Import-Module $PSScriptRoot\winwal\winwal.psm1
 
 $WALLPAPER_FOLDER = "$HOME\Downloads\reddit"
 
-function wal {
-  [CmdletBinding(DefaultParameterSetName = "Run")]
-  param (
-    [Parameter(ValueFromRemainingArguments = $true)]
-    [string[]]$Args
-  )
-  $exe = Get-Command wal -CommandType Application
-  & $exe.Path '--cols16' @Args
-}
+# function wal {
+#   [CmdletBinding(DefaultParameterSetName = "Run")]
+#   param (
+#     [Parameter(ValueFromRemainingArguments = $true)]
+#     [string[]]$Args
+#   )
+#   $exe = Get-Command wal -CommandType Application
+#   & $exe.Path '--cols16' @Args
+# }
 
 function SetWallpaper() {
   param(

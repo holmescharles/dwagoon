@@ -1,3 +1,11 @@
+# Set execution policy to allow script execution for all users
+Try {
+    Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
+    Write-Host "Execution policy set to RemoteSigned for LocalMachine."
+} Catch {
+    Write-Warning "Failed to set execution policy at LocalMachine scope: $_"
+}
+
 # Use the folder where this script is located
 $moduleFolder = $PSScriptRoot
 $moduleFile = Join-Path $moduleFolder "Dwagoon.psm1"
