@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from ..message import message
+from .message import message
 
 
 def main():

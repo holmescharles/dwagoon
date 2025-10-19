@@ -3,10 +3,10 @@ import asyncio
 from itertools import islice
 from pathlib import Path
 
-from ..message import message
-from ..urls import fetch_urls
-from ..download import download_images
-from ..toosmall import purge_small_images
+from .message import message
+from .urls import fetch_urls
+from .download import download_images
+from .toosmall import purge_small_images
 
 from .rice import WALLPAPER_FOLDER
 

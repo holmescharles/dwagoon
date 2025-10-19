@@ -4,7 +4,7 @@ import platform
 from subprocess import run
 import sys
 
-from ..message import message
+from .message import message
 
 WALLPAPER_FOLDER = Path.home() / "Downloads" / "Wallpapers"
 
