@@ -14,5 +14,3 @@ def purge_small_images(folder):
         image.close()
         child.unlink()
         message(f"Removed {child}: Too small")
-
-
