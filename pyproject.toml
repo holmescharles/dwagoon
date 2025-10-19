@@ -9,11 +9,10 @@ description = "Download wallpapers and goon"
 dependencies = ["requests", "aiohttp", "pillow", "pywal16", "colorz"]
 
 [project.scripts]
-reddit = "yodawg.scripts.reddit:main"
+reddit = "yodawg.reddit:main"
 wal = "pywal.__main__:main"
-rice = "yodawg.scripts.rice:main"
-rice2 = "yodawg.scripts.rice:main"
-save-wallpaper = "yodawg.scripts.savewall:main"
+rice = "yodawg.rice:main"
+save-wallpaper = "yodawg.savewall:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

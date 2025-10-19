@@ -11,7 +11,6 @@ from ..toosmall import purge_small_images
 from .rice import WALLPAPER_FOLDER
 
 
-
 PARSER = ArgumentParser()
 PARSER.add_argument("subreddit", nargs="?", default="wallpaper")
 PARSER.add_argument("--count", "-n", type=int, default=200)
