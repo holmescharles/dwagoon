@@ -5,10 +5,8 @@ import platform
 from subprocess import run
 import sys
 
+from .download import WALLPAPER_FOLDER
 from .message import message
-
-WALLPAPER_FOLDER = Path.home() / "Downloads" / "Wallpapers"
-
 
 PARSER = ArgumentParser()
 PARSER.add_argument("--dark", action="store_true", help="dark color scheme?")
@@ -37,10 +35,6 @@ def is_wsl():
 
 def is_windows():
   return platform.system() == "Windows"
-
-
-def parse_args():
-  parser = ArgumentParser(description="Apply a wallpaper and color scheme using pywal.")
 
 
 def main():

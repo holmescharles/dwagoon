@@ -5,6 +5,8 @@ from aiohttp import ClientSession, ClientTimeout
 
 from .message import message
 
+WALLPAPER_FOLDER = Path.home() / "Downloads" / "Wallpapers"
+
 
 MAX_CONCURRENT = 10
 HEADERS = {"User-Agent": "wallpaper-download"}

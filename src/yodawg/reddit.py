@@ -8,7 +8,7 @@ from .urls import fetch_urls
 from .download import download_images
 from .toosmall import purge_small_images
 
-from .rice import WALLPAPER_FOLDER
+from .download import WALLPAPER_FOLDER
 
 
 PARSER = ArgumentParser()
