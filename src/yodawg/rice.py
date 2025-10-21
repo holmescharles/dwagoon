@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 import os
 from pathlib import Path
 import platform
@@ -7,6 +8,16 @@ import sys
 from .message import message
 
 WALLPAPER_FOLDER = Path.home() / "Downloads" / "Wallpapers"
+
+
+PARSER = ArgumentParser()
+PARSER.add_argument("--dark", action="store_true", help="dark color scheme?")
+PARSER.add_argument(
+  "image",
+  nargs="?",
+  default=WALLPAPER_FOLDER,
+  help="path to wallpaper image or folder of images",
+)
 
 
 def is_ssh():
@@ -28,12 +39,21 @@ def is_windows():
   return platform.system() == "Windows"
 
 
+def parse_args():
+  parser = ArgumentParser(description="Apply a wallpaper and color scheme using pywal.")
+
+
 def main():
+  params = PARSER.parse_args()
+
   if is_ssh():
     message(f"{sys.argv[0]} will not run in SSH")
     return
 
-  command = ["wal", "-i", WALLPAPER_FOLDER, "--cols16"] + sys.argv[1:]
+  command = ["wal", "-i", params.image, "--cols16"]
+  if not params.dark:
+    command += ["-l"]
+
   message(f"Running: {' '.join(map(str, command))}")
   if is_wsl():
     message("Delegating to powershell")

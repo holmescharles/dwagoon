@@ -1,2 +1,2 @@
-include src\dwagoon\scripts\UpdateTerminal.ps1
+include src\yodawg\UpdateTerminal.ps1
 
