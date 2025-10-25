@@ -9,7 +9,7 @@ from .download import WALLPAPER_FOLDER
 from .message import message
 
 PARSER = ArgumentParser()
-PARSER.add_argument("--dark", action="store_true", help="dark color scheme?")
+PARSER.add_argument("-l", "--light", action="store_true", help="use light color scheme (default is dark)")
 PARSER.add_argument(
   "image",
   nargs="?",
@@ -45,7 +45,7 @@ def main():
     return
 
   command = ["wal", "-i", params.image, "--cols16"]
-  if not params.dark:
+  if params.light:
     command += ["-l"]
 
   message(f"Running: {' '.join(map(str, command))}")
