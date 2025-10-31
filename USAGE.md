@@ -153,29 +153,38 @@ See [pywal16 documentation](https://github.com/eylles/pywal16) for full options.
 
 ## Configuration
 
-### Wallpaper Download Location
+YoDawg stores all configuration settings in `src/yodawg/config.py`, making it easy to customize behavior.
 
-By default, wallpapers are downloaded to `~/Downloads/Wallpapers/`. This is defined in `src/yodawg/download.py`:
+### Configurable Settings
 
+**Wallpaper Locations:**
 ```python
+# Download location (default: ~/Downloads/Wallpapers)
 WALLPAPER_FOLDER = Path.home() / "Downloads" / "Wallpapers"
+
+# Saved wallpapers location (default: ~/Pictures/saved_wallpapers)  
+SAVED_WALLPAPER_FOLDER = Path.home() / "Pictures" / "saved_wallpapers"
 ```
 
-### Image Size Filtering
-
-Images smaller than 1920px width are automatically removed. This is defined in `src/yodawg/toosmall.py`:
-
+**Image Filtering:**
 ```python
-if width < 1920:
+# Minimum image width in pixels (default: 1920)
+MIN_IMAGE_WIDTH = 1920
 ```
 
-### Concurrent Downloads
-
-Maximum concurrent downloads is set to 10 in `src/yodawg/download.py`:
-
+**Download Settings:**
 ```python
-MAX_CONCURRENT = 10
+# Maximum concurrent downloads (default: 10)
+MAX_CONCURRENT_DOWNLOADS = 10
+
+# Number of retry attempts for failed downloads (default: 5)
+MAX_DOWNLOAD_RETRIES = 5
+
+# Download timeout in seconds (default: 30)
+DOWNLOAD_TIMEOUT = 30
 ```
+
+To customize these settings, edit `/path/to/yodawg/src/yodawg/config.py` with your preferred values.
 
 ## Workflow
 
