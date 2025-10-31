@@ -18,13 +18,13 @@ PARSER = ArgumentParser()
 PARSER.add_argument("subreddit", nargs="?", default="wallpaper")
 PARSER.add_argument("--count", "-n", type=int, default=200, 
                     help="Number of posts to fetch from Reddit")
-PARSER.add_argument("--new", type=int, 
+PARSER.add_argument("--new", "-w", type=int, 
                     help="Download only this many new wallpapers")
-PARSER.add_argument("--clear", action="store_true",
+PARSER.add_argument("--clear", "-c", action="store_true",
                     help="Clear existing wallpapers before downloading")
-PARSER.add_argument("--nsfw", action="store_true",
+PARSER.add_argument("--nsfw", "-x", action="store_true",
                     help="Use NSFW channel (separate folder)")
-PARSER.add_argument("--filter-boring", action="store_true",
+PARSER.add_argument("--filter-boring", "-b", action="store_true",
                     help="Filter out images with boring (white/black) backgrounds")
 
 
@@ -40,15 +40,13 @@ def main():
   
   wallpaper_folder.mkdir(parents=True, exist_ok=True)
   
-  # Initialize blacklist database
-  blacklist_db = BlacklistDB(wallpaper_folder / ".blacklist.db")
+  # Initialize blacklist database (uses default ~/.cache/yodawg/blacklist.csv)
+  blacklist_db = BlacklistDB()
   
   if params.clear:
     message(f"Clearing: {wallpaper_folder}")
     shutil.rmtree(wallpaper_folder)
     wallpaper_folder.mkdir()
-    # Reinitialize blacklist after clearing
-    blacklist_db = BlacklistDB(wallpaper_folder / ".blacklist.db")
 
   urls = list(islice(fetch_urls(params.subreddit), params.count))
   if not urls:

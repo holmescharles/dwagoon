@@ -1,9 +1,8 @@
 """Blacklist management for wallpapers."""
-import sqlite3
+import csv
 from pathlib import Path
 from enum import Enum
-
-from .config import WALLPAPER_FOLDER
+from datetime import datetime
 
 
 class BlacklistReason(Enum):
@@ -14,59 +13,84 @@ class BlacklistReason(Enum):
 
 
 class BlacklistDB:
-    """Database for tracking blacklisted wallpapers."""
+    """CSV-based storage for tracking blacklisted wallpapers.
     
-    def __init__(self, db_path=None):
-        if db_path is None:
-            db_path = WALLPAPER_FOLDER / ".blacklist.db"
-        self.db_path = Path(db_path)
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self._init_db()
+    Uses a simple CSV file format: filename,reason,timestamp
+    Each line represents one blacklisted file.
+    """
     
-    def _init_db(self):
-        """Initialize the database schema."""
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("""
-                CREATE TABLE IF NOT EXISTS blacklist (
-                    filename TEXT PRIMARY KEY,
-                    reason TEXT NOT NULL,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-                )
-            """)
-            conn.commit()
+    def __init__(self, csv_path=None):
+        if csv_path is None:
+            # Use ~/.cache/yodawg/blacklist.csv as default
+            cache_dir = Path.home() / ".cache" / "yodawg"
+            csv_path = cache_dir / "blacklist.csv"
+        
+        self.csv_path = Path(csv_path)
+        self.csv_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Create file with header if it doesn't exist
+        if not self.csv_path.exists():
+            self._init_csv()
+    
+    def _init_csv(self):
+        """Initialize the CSV file with header."""
+        with open(self.csv_path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['filename', 'reason', 'timestamp'])
+    
+    def _load_data(self):
+        """Load all blacklist data from CSV into a dictionary."""
+        data = {}
+        try:
+            with open(self.csv_path, 'r', newline='') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    data[row['filename']] = {
+                        'reason': row['reason'],
+                        'timestamp': row['timestamp']
+                    }
+        except FileNotFoundError:
+            self._init_csv()
+        return data
+    
+    def _save_data(self, data):
+        """Save all blacklist data from dictionary to CSV."""
+        with open(self.csv_path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['filename', 'reason', 'timestamp'])
+            for filename, info in data.items():
+                writer.writerow([filename, info['reason'], info['timestamp']])
     
     def add(self, filename, reason):
         """Add a file to the blacklist."""
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute(
-                "INSERT OR REPLACE INTO blacklist (filename, reason) VALUES (?, ?)",
-                (filename, reason.value if isinstance(reason, BlacklistReason) else reason)
-            )
-            conn.commit()
+        data = self._load_data()
+        reason_str = reason.value if isinstance(reason, BlacklistReason) else reason
+        timestamp = datetime.now().isoformat()
+        
+        # Update or add entry
+        data[filename] = {'reason': reason_str, 'timestamp': timestamp}
+        self._save_data(data)
     
     def is_blacklisted(self, filename):
         """Check if a file is blacklisted."""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute(
-                "SELECT 1 FROM blacklist WHERE filename = ?",
-                (filename,)
-            )
-            return cursor.fetchone() is not None
+        data = self._load_data()
+        return filename in data
     
     def get_reason(self, filename):
         """Get the reason a file was blacklisted."""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute(
-                "SELECT reason FROM blacklist WHERE filename = ?",
-                (filename,)
-            )
-            result = cursor.fetchone()
-            return result[0] if result else None
+        data = self._load_data()
+        if filename in data:
+            return data[filename]['reason']
+        return None
     
     def list_all(self):
-        """List all blacklisted files with reasons."""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute(
-                "SELECT filename, reason, timestamp FROM blacklist ORDER BY timestamp DESC"
-            )
-            return cursor.fetchall()
+        """List all blacklisted files with reasons as tuples (filename, reason, timestamp)."""
+        data = self._load_data()
+        # Sort by timestamp descending
+        sorted_items = sorted(
+            data.items(), 
+            key=lambda x: x[1]['timestamp'], 
+            reverse=True
+        )
+        return [(filename, info['reason'], info['timestamp']) 
+                for filename, info in sorted_items]

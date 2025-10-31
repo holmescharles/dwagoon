@@ -10,9 +10,9 @@ from .message import message
 PARSER = ArgumentParser()
 PARSER.add_argument("-l", "--light", action="store_true", 
                     help="use light color scheme (default is dark)")
-PARSER.add_argument("--nsfw", action="store_true",
+PARSER.add_argument("-x", "--nsfw", action="store_true",
                     help="use NSFW wallpaper channel")
-PARSER.add_argument("--delete", action="store_true",
+PARSER.add_argument("-d", "--delete", action="store_true",
                     help="blacklist current wallpaper and remove it")
 PARSER.add_argument(
   "image",
@@ -50,11 +50,8 @@ def main():
       message("Error: No current wallpaper found to delete")
       return 1
     
-    # Determine which folder and blacklist to use
-    if WALLPAPER_FOLDER_NSFW in current_wallpaper.parents:
-      blacklist_db = BlacklistDB(WALLPAPER_FOLDER_NSFW / ".blacklist.db")
-    else:
-      blacklist_db = BlacklistDB(WALLPAPER_FOLDER_SFW / ".blacklist.db")
+    # Use default blacklist (shared across all channels)
+    blacklist_db = BlacklistDB()
     
     # Add to blacklist and delete
     blacklist_db.add(current_wallpaper.name, BlacklistReason.DELETED)
