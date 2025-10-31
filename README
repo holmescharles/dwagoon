@@ -1,25 +1,21 @@
-# Yo Dawg
+# YoDawg
 
-I heard you like wallpapers and themes...
+A Python-based wallpaper manager that downloads wallpapers from Reddit and automatically generates color schemes for your terminal.
 
-## Installation
+## Quick Start
 
-To install for all users, run terminal as administrator and execute:
-
-```powershell
-cd C:\Users\Public\Documents
-git clone --recurse-submodules git@github.com:holmescharles/dwagoon.git
-pip install .\dwagoon
+```bash
+pip install yodawg
 ```
 
-Then add the following to your PowerShell profile (run `notepad $PROFILE` to open it):
-
-```powershell
-Import-Module "C:\Users\Public\Documents\dwagoon\dwagoon.psm1"
+Download wallpapers:
+```bash
+reddit wallpaper
 ```
 
-Download wallpapers with `reddit`.
+Apply wallpaper and color scheme:
+```bash
+rice
+```
 
-Change wallpapers and themes with `rice`.
-
-Do not install in editable mode -- otherwise other users will not be able to access the files.
+For detailed usage instructions, see [USAGE.md](USAGE.md).
