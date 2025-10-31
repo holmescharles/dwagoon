@@ -29,3 +29,6 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+test_images/
+BORING.txt
+NOT_BORING.txt
