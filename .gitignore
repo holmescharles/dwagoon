@@ -1,3 +1,34 @@
+# Python
 *.egg-info
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
 *.swp
+
+# Build artifacts
 /build
+/dist
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+test_images/
+BORING.txt
+NOT_BORING.txt
