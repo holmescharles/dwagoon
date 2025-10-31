@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 import asyncio
 from itertools import islice
 from pathlib import Path
+import shutil
 
 from .config import WALLPAPER_FOLDER
 from .message import message
@@ -24,7 +25,6 @@ def main():
   WALLPAPER_FOLDER.mkdir(parents=True, exist_ok=True)
   if params.clear:
     message(f"Clearing: {WALLPAPER_FOLDER}")
-    import shutil
     shutil.rmtree(WALLPAPER_FOLDER)
     WALLPAPER_FOLDER.mkdir()
 

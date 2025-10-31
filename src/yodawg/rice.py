@@ -32,7 +32,7 @@ def main():
   message(f"Running: {' '.join(map(str, command))}")
   
   try:
-    result = run(command, check=True)
+    run(command, check=True)
   except FileNotFoundError:
     message("Error: 'wal' command not found. Is pywal16 installed?")
     return 1

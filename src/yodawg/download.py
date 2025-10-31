@@ -32,7 +32,6 @@ async def get_image(session, url):
   return None
 
 
-
 async def download_images(urls, output):
   """Download images concurrently to the specified folder."""
   folder = Path(output)
