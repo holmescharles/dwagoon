@@ -31,8 +31,10 @@ def main(args=None):
     command += ["-l"]
   message(f"Running: {' '.join(map(str, command))}")
   result = run(command)
-  
-  # If --cols16 fails, retry without it
+
+  # FIXME: Temporary workaround for pywal16 --cols16 bug with 8-15 color images
+  # Remove this fallback once upstream pywal16 fixes the wal backend validation
+  # See: pywal16_bug_report.md for details
   if result.returncode != 0:
     message("--cols16 failed, retrying with 8 colors")
     command = ["wal", "-i", image]
