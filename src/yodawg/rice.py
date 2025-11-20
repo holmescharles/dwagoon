@@ -30,7 +30,15 @@ def main(args=None):
   if params.light:
     command += ["-l"]
   message(f"Running: {' '.join(map(str, command))}")
-  run(command)
+  result = run(command)
+  
+  # If --cols16 fails, retry without it
+  if result.returncode != 0:
+    message("--cols16 failed, retrying with 8 colors")
+    command = ["wal", "-i", image]
+    if params.light:
+      command += ["-l"]
+    run(command)
 
   if is_windows():
     message("Updating terminal")
