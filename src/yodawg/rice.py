@@ -22,10 +22,11 @@ def is_windows():
   return platform.system() == "Windows"
 
 
-def main():
-  params = PARSER.parse_args()
+def main(args=None):
+  params = PARSER.parse_args() if args is None else args
 
-  command = ["wal", "-i", params.image, "--cols16"]
+  image = params.image if params.image else WALLPAPER_FOLDER
+  command = ["wal", "-i", image, "--cols16"]
   if params.light:
     command += ["-l"]
   message(f"Running: {' '.join(map(str, command))}")

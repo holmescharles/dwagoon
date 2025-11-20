@@ -3,7 +3,7 @@ from pathlib import Path
 from .message import message
 
 
-def main():
+def main(args=None):
   wal_file = Path.home() / ".cache" / "wal" / "wal"
   with wal_file.open() as f:
     image_file = Path(f.readline())

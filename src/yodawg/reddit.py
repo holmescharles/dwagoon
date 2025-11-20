@@ -17,8 +17,8 @@ PARSER.add_argument("--count", "-n", type=int, default=200)
 PARSER.add_argument("--clear", action="store_true")
 
 
-def main():
-  params = PARSER.parse_args()
+def main(args=None):
+  params = PARSER.parse_args() if args is None else args
 
   WALLPAPER_FOLDER.mkdir(parents=True, exist_ok=True)
   if params.clear:
