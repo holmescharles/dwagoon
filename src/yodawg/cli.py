@@ -18,13 +18,12 @@ def print_version():
     except Exception:
         pywal_version = "unknown"
     
-    print(f"yodawg {yodawg_version}")
-    print(f"pywal16 {pywal_version}")
+    print(f"yodawg {yodawg_version} (pywal16 {pywal_version})")
 
 
 def main():
     parser = ArgumentParser(prog="yodawg", description="Download wallpapers and manage rice")
-    parser.add_argument("--version", action="store_true", help="Show version information")
+    parser.add_argument("-V", "--version", action="store_true", help="Show version information")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # reddit subcommand
